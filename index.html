@@ -1,908 +1,1031 @@
-<html="" lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>DVM WELFARE • paws &amp; healers</title>
-  <!-- Google Font – Inter clean & modern -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300..800&amp;display=swap" rel="stylesheet">
-  <!-- Font Awesome 6 (full free version) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>ConnectHub · Login & Signup</title>
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ---------- GLOBAL RESET & VARIABLES (advanced) ---------- */
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
 
-    html {
-      scroll-behavior: smooth;
-      font-size: 16px;
-    }
-
     body {
+      background: #f4f6fa;
       font-family: 'Inter', sans-serif;
-      background-color: #fcfdfe;
-      color: #1a2e3b;
-      line-height: 1.5;
-      overflow-x: hidden;
+      color: #1e293b;
     }
 
-    :root {
-      --primary: #0f6f5e;        /* deep teal – welfare & trust */
-      --primary-light: #e2f0ef;
-      --primary-dark: #0a4e44;
-      --accent: #e27f5a;         /* soft coral – warmth, action */
-      --accent-light: #ffede7;
-      --gray-bg: #f5f9fc;
-      --white: #ffffff;
-      --shadow-sm: 0 10px 30px -10px rgba(0, 32, 29, 0.08);
-      --shadow-hover: 0 25px 40px -14px rgba(14, 68, 62, 0.12);
-      --radius-md: 20px;
-      --radius-sm: 14px;
-    }
-
-    /* ---------- TYPOGRAPHY & LINKS ---------- */
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .section {
-      padding: 5rem 0 4rem;
-    }
-
-    .section-title {
-      font-size: 2.2rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      color: #0c3b36;
-      margin-bottom: 1rem;
-      line-height: 1.2;
-    }
-
-    .section-title span {
-      color: var(--primary);
-      border-bottom: 4px solid var(--accent);
-      display: inline-block;
-      padding-bottom: 0.2rem;
-    }
-
-    .section-subhead {
-      font-size: 1.18rem;
-      color: #4c6763;
-      max-width: 680px;
-      margin-bottom: 3rem;
-      font-weight: 400;
-    }
-
-    /* ---------- NAVBAR (sticky, glassy, scroll effect) ---------- */
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.1rem 2.5rem;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-      position: sticky;
+    /* ---------- LOGIN / SIGNUP OVERLAY ---------- */
+    .auth-container {
+      position: fixed;
       top: 0;
-      z-index: 999;
-      transition: all 0.25s ease;
-    }
-
-    .navbar-scrolled {
-      box-shadow: 0 8px 25px rgba(15, 111, 94, 0.1);
-      background: rgba(255, 255, 255, 0.98);
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-    }
-
-    .logo i {
-      color: var(--accent);
-      font-size: 2rem;
-      transform: rotate(-3deg);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2.2rem;
-      font-weight: 550;
-      color: #1f473f;
-    }
-
-    .nav-links a {
-      position: relative;
-      padding-bottom: 0.2rem;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--primary);
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
       left: 0;
-      width: 0%;
-      height: 2.5px;
-      background: var(--accent);
-      transition: 0.25s ease;
-    }
-
-    .nav-links a:hover::after {
       width: 100%;
-    }
-
-    .btn-donate {
-      background: var(--accent);
-      color: white !important;
-      padding: 0.55rem 1.4rem;
-      border-radius: 40px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      box-shadow: 0 6px 14px rgba(226, 127, 90, 0.25);
-      transition: all 0.2s;
-    }
-
-    .btn-donate:hover {
-      background: #d1643e;
-      transform: translateY(-2px);
-      box-shadow: 0 12px 18px rgba(226, 127, 90, 0.35);
-    }
-
-    .btn-donate::after {
-      display: none !important;
-    }
-
-    /* ---------- HERO section (2‑col grid, advanced) ---------- */
-    .hero {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      align-items: center;
-      gap: 2rem;
-      padding: 2.5rem 2rem 3rem;
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .hero-left h1 {
-      font-size: 3.3rem;
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: #0f3630;
-      margin-bottom: 1.5rem;
-    }
-
-    .highlight {
-      color: var(--primary);
-      background: linear-gradient(145deg, #def5f0, #c2ede5);
-      padding: 0 0.2rem;
-      display: inline-block;
-    }
-
-    .hero-left p {
-      font-size: 1.2rem;
-      color: #3e605b;
-      margin-bottom: 2.5rem;
-      max-width: 90%;
-    }
-
-    .btn-group {
-      display: flex;
-      gap: 1.3rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: white;
-      font-weight: 600;
-      padding: 0.85rem 2.2rem;
-      border-radius: 50px;
-      border: 1px solid transparent;
-      transition: 0.2s all;
-      box-shadow: 0 8px 16px rgba(15, 111, 94, 0.15);
+      height: 100%;
+      background: linear-gradient(145deg, #f9fafc 0%, #eef2f9 100%);
       display: flex;
       align-items: center;
-      gap: 0.6rem;
-    }
-
-    .btn-primary i {
-      font-size: 1rem;
-    }
-
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      transform: scale(1.03);
-    }
-
-    .btn-outline {
-      background: transparent;
-      border: 1.8px solid var(--primary);
-      color: var(--primary-dark);
-      font-weight: 600;
-      padding: 0.85rem 2.2rem;
-      border-radius: 50px;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-
-    .btn-outline:hover {
-      background: var(--primary-light);
-      border-color: var(--primary-dark);
-    }
-
-    .hero-right {
-      display: flex;
       justify-content: center;
-      align-items: center;
-      position: relative;
+      z-index: 1000;
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
     }
-
-    .icon-bubble-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1.8rem;
-      background: radial-gradient(circle at 30% 30%, #ebf7f5, transparent 70%);
-      padding: 1.5rem;
-    }
-
-    .bubble-icon {
+    .auth-card {
       background: white;
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: var(--shadow-sm);
-      color: var(--primary);
-      font-size: 2.8rem;
-      transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1);
-    }
-
-    .bubble-icon:hover {
-      transform: translateY(-8px);
-      box-shadow: var(--shadow-hover);
-      background: var(--primary);
-      color: white;
-    }
-
-    .bubble-icon span {
-      font-size: 0.8rem;
-      margin-top: 0.4rem;
-      font-weight: 600;
-      color: #0a4e44;
-    }
-
-    .bubble-icon:hover span {
-      color: white;
-    }
-
-    /* ---------- SERVICES (grid, micro-interactions) ---------- */
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-top: 1.5rem;
-    }
-
-    .service-card {
-      background: var(--white);
-      padding: 2.4rem 1.8rem;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-sm);
-      transition: 0.25s ease;
-      border: 1px solid rgba(15, 111, 94, 0.05);
-    }
-
-    .service-card:hover {
-      transform: translateY(-10px);
-      box-shadow: var(--shadow-hover);
-      border-color: transparent;
-    }
-
-    .service-icon {
-      background: var(--primary-light);
-      width: 65px;
-      height: 65px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      color: var(--primary);
-      margin-bottom: 1.8rem;
-    }
-
-    .service-card h3 {
-      font-size: 1.55rem;
-      font-weight: 700;
-      margin-bottom: 0.7rem;
-      color: #0e3d38;
-    }
-
-    .service-card p {
-      color: #4d6965;
-      font-weight: 400;
-      line-height: 1.6;
-    }
-
-    /* ---------- STATS / IMPACT (counter style) ---------- */
-    .stats-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      background: var(--primary);
-      padding: 3rem 3.5rem;
-      border-radius: 50px;
-      color: white;
-      margin-top: 3rem;
-    }
-
-    .stat-item {
+      max-width: 440px;
+      width: 90%;
+      padding: 2rem 1.8rem;
+      border-radius: 48px;
+      box-shadow: 0 25px 45px -12px rgba(0,0,0,0.25);
       text-align: center;
+      border: 1px solid rgba(255,255,255,0.5);
     }
-
-    .stat-number {
-      font-size: 2.8rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    .stat-label {
-      font-size: 1.1rem;
-      opacity: 0.85;
-      font-weight: 500;
-    }
-
-    /* ---------- TEAM section – DVMs ---------- */
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 2.2rem;
-      margin-top: 2rem;
-    }
-
-    .team-card {
-      background: white;
-      padding: 2rem 1.5rem;
-      border-radius: var(--radius-md);
-      text-align: center;
-      box-shadow: var(--shadow-sm);
-      transition: 0.2s;
-      border-bottom: 4px solid transparent;
-    }
-
-    .team-card:hover {
-      border-bottom: 4px solid var(--accent);
-      transform: scale(0.98);
-    }
-
-    .team-avatar {
-      font-size: 4rem;
-      color: var(--primary);
-      margin-bottom: 0.8rem;
-    }
-
-    .team-card h4 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: #0a3d38;
-      margin-bottom: 0.25rem;
-    }
-
-    .dvm-title {
-      color: var(--accent);
-      font-weight: 700;
-      letter-spacing: 0.8px;
-      margin-bottom: 0.6rem;
-    }
-
-    .team-bio {
-      color: #577570;
-      font-size: 0.95rem;
-    }
-
-    /* ---------- TESTIMONIALS ---------- */
-    .testimonial-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2rem;
-    }
-
-    .testimonial {
-      background: white;
-      padding: 2rem;
-      border-radius: 30px 30px 30px 0;
-      box-shadow: var(--shadow-sm);
-      position: relative;
-    }
-
-    .testimonial i.fa-quote-left {
-      color: var(--accent);
-      opacity: 0.25;
-      font-size: 2rem;
+    .auth-card i {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
       margin-bottom: 0.5rem;
     }
-
-    .testimonial p {
-      font-style: italic;
-      color: #1d4440;
-      font-weight: 450;
-      margin-bottom: 1.5rem;
-    }
-
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .testimonial-author i {
-      font-size: 2.5rem;
-      color: var(--primary-light);
-    }
-
-    .author-info strong {
-      color: #0e4c44;
-    }
-
-    /* ---------- FOOTER (advanced grid) ---------- */
-    .footer {
-      background: #132b27;
-      color: #e6f1ef;
-      padding: 3.5rem 2rem 2rem;
-      margin-top: 3rem;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1.5fr;
-      gap: 2rem;
-      max-width: 1280px;
-      margin: 0 auto;
-    }
-
-    .footer-logo {
-      font-size: 1.9rem;
+    .auth-card h2 {
       font-weight: 700;
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 0.5rem;
     }
-
-    .footer-logo i {
-      color: var(--accent);
+    .auth-card p {
+      color: #5b6e8c;
+      font-size: 0.85rem;
+      margin-bottom: 1.8rem;
     }
-
-    .footer-about p {
-      color: #bdd3cf;
-      margin-bottom: 1.5rem;
+    .input-group {
+      margin-bottom: 1rem;
+      text-align: left;
     }
-
-    .social-links {
-      display: flex;
-      gap: 1.3rem;
-      font-size: 1.5rem;
-    }
-
-    .social-links a {
-      color: white;
-      transition: 0.15s;
-    }
-
-    .social-links a:hover {
-      color: var(--accent);
-      transform: translateY(-3px);
-    }
-
-    .footer-col h5 {
-      color: white;
-      font-size: 1.2rem;
+    .input-group label {
+      font-size: 0.75rem;
       font-weight: 600;
-      margin-bottom: 1.5rem;
+      display: block;
+      margin-bottom: 6px;
+      color: #334155;
     }
-
-    .footer-col ul {
-      list-style: none;
-    }
-
-    .footer-col li {
-      margin-bottom: 0.75rem;
-    }
-
-    .footer-col a {
-      color: #c8e0db;
-      text-decoration: none;
-      font-weight: 400;
+    .input-group input {
+      width: 100%;
+      padding: 12px 16px;
+      border-radius: 32px;
+      border: 1px solid #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      background: #fefefe;
       transition: 0.2s;
     }
-
-    .footer-col a:hover {
-      color: var(--accent);
-      padding-left: 5px;
-    }
-
-    .newsletter-form {
-      display: flex;
-      margin-top: 0.5rem;
-      background: white;
-      border-radius: 60px;
-      overflow: hidden;
-      border: 1px solid #ced9d6;
-    }
-
-    .newsletter-form input {
-      flex: 1;
-      padding: 0.9rem 1.2rem;
-      border: none;
+    .input-group input:focus {
       outline: none;
-      font-size: 1rem;
+      border-color: #818cf8;
+      box-shadow: 0 0 0 2px #c7d2fe;
     }
-
-    .newsletter-form button {
-      background: var(--accent);
+    .auth-btn {
+      background: #4f46e5;
+      width: 100%;
       border: none;
+      padding: 12px;
+      border-radius: 40px;
       color: white;
-      padding: 0 1.4rem;
-      font-size: 1.3rem;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 0.5rem;
       cursor: pointer;
       transition: 0.2s;
     }
-
-    .newsletter-form button:hover {
-      background: #d1643e;
+    .auth-btn:hover {
+      background: #4338ca;
+      transform: scale(0.98);
     }
-
-    .footer-bottom {
+    .toggle-auth {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #4b5563;
+    }
+    .toggle-auth a {
+      color: #4f46e5;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .error-message {
+      color: #e11d48;
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
       text-align: center;
-      padding-top: 3rem;
-      color: #95b2ad;
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(255,255,255,0.07);
-      margin-top: 2rem;
+    }
+    .demo-note {
+      margin-top: 1.2rem;
+      font-size: 0.7rem;
+      color: #6c7a91;
+    }
+    .hidden-form {
+      display: none;
     }
 
-    /* ---------- RESPONSIVE (advanced mobile) ---------- */
-    @media screen and (max-width: 950px) {
-      .hero { grid-template-columns: 1fr; text-align: center; }
-      .hero-left p { max-width: 100%; }
-      .btn-group { justify-content: center; }
-      .icon-bubble-grid { justify-content: center; }
-      .stats-wrapper { flex-direction: column; align-items: center; gap: 2rem; }
-      .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    /* ---------- MAIN APP (hidden by default) ---------- */
+    #mainApp {
+      display: none;
     }
-
-    @media screen and (max-width: 700px) {
-      .navbar { flex-direction: column; gap: 0.8rem; padding: 1rem; }
-      .nav-links { flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
-      .section-title { font-size: 1.9rem; }
-      .hero-left h1 { font-size: 2.5rem; }
-      .footer-grid { grid-template-columns: 1fr; }
-      .container { padding: 0 1.2rem; }
+    .app-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: grid;
+      grid-template-columns: 280px 1fr 300px;
+      gap: 1.5rem;
     }
-
-    @media screen and (max-width: 480px) {
-      .bubble-icon { width: 80px; height: 80px; font-size: 2rem; }
+    .sidebar-left, .sidebar-right {
+      position: sticky;
+      top: 1rem;
+      align-self: start;
     }
-
-    /* scroll effect padding offset for anchor links */
-    .section::before {
+    .card {
+      background: #ffffff;
+      border-radius: 24px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+      padding: 1.25rem;
+      border: 1px solid #eef2f6;
+    }
+    .profile-card {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .avatar-lg {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid white;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 0.75rem;
+    }
+    .profile-card h4 {
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    .profile-card p {
+      font-size: 0.85rem;
+      color: #5b6e8c;
+      margin-bottom: 0.75rem;
+    }
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #edf2f7;
+      border-bottom: 1px solid #edf2f7;
+      padding: 0.75rem 0;
+      margin: 0.75rem 0;
+    }
+    .stat span:first-child {
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .stat span:last-child {
+      font-size: 0.75rem;
+      color: #5b6e8c;
       display: block;
-      content: "";
-      margin-top: -60px;
+    }
+    .nav-menu {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    .nav-menu li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0.7rem 0;
+      font-weight: 500;
+      color: #334155;
+      border-radius: 12px;
+      cursor: default;
+    }
+    .nav-menu li i {
+      width: 24px;
+      font-size: 1.2rem;
+      color: #4f46e5;
+    }
+    .logout-menu {
+      margin-top: 1.5rem;
+      border-top: 1px solid #edf2f7;
+      padding-top: 1rem;
+      cursor: pointer;
+      color: #e11d48;
+    }
+    .logout-menu i {
+      color: #e11d48;
+    }
+    .trending-item, .suggest-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1rem;
+    }
+    .trending-item i, .suggest-item i {
+      font-size: 1.2rem;
+      color: #4f46e5;
+    }
+    .suggest-item img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .follow-btn {
+      background: none;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      cursor: default;
+    }
+    .stories {
+      display: flex;
+      gap: 1rem;
+      overflow-x: auto;
+      margin-bottom: 1.5rem;
+    }
+    .story {
+      text-align: center;
+      min-width: 70px;
+    }
+    .story-ring {
+      background: linear-gradient(135deg, #f9a8d4, #f97316);
+      border-radius: 50%;
+      padding: 2px;
+      width: 64px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 6px;
+    }
+    .story-img {
+      width: 60px;
       height: 60px;
-      visibility: hidden;
-      pointer-events: none;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid white;
+    }
+    .create-post {
+      margin-bottom: 1.5rem;
+    }
+    .post-input-area {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .post-input-area img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .post-input-area textarea {
+      flex: 1;
+      border: 1px solid #e2e8f0;
+      border-radius: 28px;
+      padding: 12px 18px;
+      font-family: 'Inter', sans-serif;
+      resize: none;
+      font-size: 0.9rem;
+      background: #fafcff;
+    }
+    .post-input-area textarea:focus {
+      outline: none;
+      border-color: #818cf8;
+      box-shadow: 0 0 0 2px #c7d2fe;
+    }
+    .post-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .image-url-input {
+      flex: 2;
+      padding: 8px 14px;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+      font-size: 0.8rem;
+    }
+    .post-btn {
+      background: #4f46e5;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .post-card {
+      background: white;
+      border-radius: 24px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+      border: 1px solid #edf2f7;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .post-header img {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .post-content {
+      margin: 12px 0;
+      font-size: 0.95rem;
+    }
+    .post-media img {
+      width: 100%;
+      max-height: 350px;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+    .post-stats {
+      display: flex;
+      gap: 18px;
+      padding: 8px 0;
+      border-top: 1px solid #eff3f8;
+      border-bottom: 1px solid #eff3f8;
+      margin: 12px 0 10px;
+      color: #5b6e8c;
+      font-size: 0.8rem;
+    }
+    .post-buttons {
+      display: flex;
+      justify-content: space-around;
+      margin: 8px 0 12px;
+    }
+    .like-btn, .comment-toggle {
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #475569;
+    }
+    .like-btn.liked {
+      color: #ef4444;
+    }
+    .comments-section {
+      margin-top: 12px;
+      background: #f8fafc;
+      border-radius: 20px;
+      padding: 12px;
+    }
+    .comment-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 12px;
+    }
+    .single-comment {
+      font-size: 0.8rem;
+      padding: 6px 0;
+      border-bottom: 1px solid #e6edf4;
+    }
+    .comment-form {
+      display: flex;
+      gap: 8px;
+    }
+    .comment-form input {
+      flex: 1;
+      border: 1px solid #cbd5e1;
+      border-radius: 40px;
+      padding: 8px 14px;
+      font-size: 0.8rem;
+    }
+    .mobile-bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: white;
+      padding: 12px 20px;
+      justify-content: space-around;
+      border-top: 1px solid #e2e8f0;
+      z-index: 10;
+    }
+    @media (max-width: 980px) {
+      .app-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+      .sidebar-left, .sidebar-right {
+        display: none;
+      }
+      .mobile-bottom-nav {
+        display: flex;
+      }
+      body {
+        padding-bottom: 70px;
+      }
+    }
+    @media (max-width: 550px) {
+      .post-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .image-url-input {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- ADVANCED STICKY NAVIGATION (scroll aware) -->
-  <header>
-    <nav class="navbar" id="navbar">
-      <div class="logo">
-        <i class="fas fa-paw"></i> DVM<span style="color:#0f6f5e;">WELFARE</span>
-      </div>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#team">Team</a>
-        <a href="#contact">Contact</a>
-        <a href="#" class="btn-donate"><i class="fas fa-heart"></i> Donate</a>
-      </div>
-    </nav>
-  </header>
 
-  <main>
-    <!-- HERO section with welfare & DVM dual mission -->
-    <section id="home" class="hero" style="background: linear-gradient(155deg, #f3fcfb 0%, #fff 80%);">
-      <div class="hero-left">
-        <h1>
-          <span class="highlight">Healing animals,</span><br>
-          empowering DVM healers.
-        </h1>
-        <p>
-          <i class="fas fa-shield" style="color: var(--accent); margin-right: 8px;"></i> 
-          Dual welfare initiative: medical care for animals &amp; mental wellness for veterinarians.
-        </p>
-        <div class="btn-group">
-          <a href="#" class="btn-primary"><i class="fas fa-hand-holding-heart"></i>for any help and quires call at&nbsp;<a href="#" class="btn-primary" style="background-color: rgb(15, 111, 94); display: inline !important;">03016025335</a></a>
-        </div>
+<!-- AUTHENTICATION CONTAINER (LOGIN + SIGNUP) -->
+<div id="authContainer" class="auth-container">
+  <div class="auth-card">
+    <i class="fas fa-comments"></i>
+    
+    <!-- LOGIN FORM -->
+    <div id="loginForm">
+      <h2>Welcome back</h2>
+      <p>Sign in to continue to ConnectHub</p>
+      <div class="input-group">
+        <label>Email or Username</label>
+        <input type="text" id="loginIdentifier" placeholder="hello@example.com or username">
       </div>
-      <div class="hero-right">
-        <div class="icon-bubble-grid">
-          <div class="bubble-icon">
-            <i class="fas fa-dog"></i>
-            <span>Rescue</span>
-          </div>
-          <div class="bubble-icon">
-            <i class="fas fa-cat"></i>
-            <span>Foster</span>
-          </div>
-          <div class="bubble-icon">
-            <i class="fas fa-user-doctor"></i>
-            <span>DVM care</span>
-          </div>
-          <div class="bubble-icon">
-            <i class="fas fa-heart-pulse"></i>
-            <span>Wellness</span>
-          </div>
-        </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••">
       </div>
-    </section>
+      <button id="doLoginBtn" class="auth-btn"><i class="fas fa-arrow-right-to-bracket"></i> Log in</button>
+      <div id="loginError" class="error-message"></div>
+      <div class="toggle-auth">
+        Don't have an account? <a id="showSignupLink">Create account →</a>
+      </div>
+    </div>
 
-    <!-- ABOUT / STATS (welfare in numbers) -->
-    <section id="about" class="section container">
-      <h2 class="section-title"><span>Why</span> DVM welfare matters</h2>
-      <div class="section-subhead">
-        We bridge veterinary excellence and animal protection — because healthy vets save more lives.
+    <!-- SIGNUP FORM (hidden initially) -->
+    <div id="signupForm" class="hidden-form">
+      <h2>Join ConnectHub</h2>
+      <p>Share your world, connect with others</p>
+      <div class="input-group">
+        <label>Full Name</label>
+        <input type="text" id="signupName" placeholder="Alex Johnson">
       </div>
-      <div class="stats-wrapper">
-        <div class="stat-item">
-          <div class="stat-number">12,400+</div>
-          <div class="stat-label">animals treated</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">850+</div>
-          <div class="stat-label">DVMs supported</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">34</div>
-          <div class="stat-label">welfare clinics</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-number">5k+</div>
-          <div class="stat-label">spay/neuter</div>
-        </div>
+      <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="signupUsername" placeholder="alex.j">
       </div>
-    </section>
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email" id="signupEmail" placeholder="hello@example.com">
+      </div>
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="signupPassword" placeholder="Create a strong password">
+      </div>
+      <div class="input-group">
+        <label>Confirm Password</label>
+        <input type="password" id="signupConfirm" placeholder="Confirm password">
+      </div>
+      <button id="doSignupBtn" class="auth-btn"><i class="fas fa-user-plus"></i> Sign up</button>
+      <div id="signupError" class="error-message"></div>
+      <div class="toggle-auth">
+        Already have an account? <a id="showLoginLink">Log in →</a>
+      </div>
+    </div>
+    <div class="demo-note">
+      ✨ New here? Sign up and start posting. Demo posts are preloaded for everyone.
+    </div>
+  </div>
+</div>
 
-    <!-- SERVICES – advanced cards, full welfare spectrum -->
-    <section id="services" class="section container">
-      <h2 class="section-title"><span>Our</span> veterinary welfare programs</h2>
-      <div class="section-subhead">
-        From emergency rescue to DVM peer support – we treat both paws and professionals.
-      </div>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-truck-medical"></i></div>
-          <h3>Mobile outreach</h3>
-          <p>Rural veterinary camps &amp; free vaccination drives, led by volunteer DVM.</p>
+<!-- MAIN APP (hidden until auth) -->
+<div id="mainApp">
+  <div class="app-grid">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-left">
+      <div class="card profile-card">
+        <img class="avatar-lg" id="currentUserAvatar" src="" alt="profile">
+        <h4 id="currentUserName"></h4>
+        <p id="currentUserHandle"></p>
+        <div class="stats">
+          <div class="stat"><span>0</span><span>posts</span></div>
+          <div class="stat"><span>1.2k</span><span>followers</span></div>
+          <div class="stat"><span>876</span><span>following</span></div>
         </div>
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-syringe"></i></div>
-          <h3>Spay &amp; neuter</h3>
-          <p>High-volume, low-stress sterilization to control overpopulation.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-hand-holding-heart"></i></div>
-          <h3>Vet wellness fund</h3>
-          <p>Mental health resources, burnout prevention, and DVM peer listening.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-book-open"></i></div>
-          <h3>Education</h3>
-          <p>Scholarships for vet students &amp; public humane education.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-laptop-medical"></i></div>
-          <h3>Telemedicine</h3>
-          <p>Free tele-advice for shelters and low-income caregivers.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon"><i class="fas fa-shield-dog"></i></div>
-          <h3>Disaster response</h3>
-          <p>Veterinary first responders for animals in crisis zones.</p>
+        <ul class="nav-menu">
+          <li><i class="fas fa-home"></i> <span>Home</span></li>
+          <li><i class="fas fa-compass"></i> <span>Explore</span></li>
+          <li><i class="fas fa-bell"></i> <span>Notifications</span></li>
+          <li><i class="fas fa-envelope"></i> <span>Messages</span></li>
+        </ul>
+        <div id="logoutBtn" class="logout-menu nav-menu" style="cursor:pointer;">
+          <li><i class="fas fa-sign-out-alt"></i> <span>Logout</span></li>
         </div>
       </div>
-    </section>
+    </aside>
 
-    <!-- TEAM – meet the DVMs behind the welfare -->
-    <section id="team" class="section container">
-      <h2 class="section-title"><span>Compassionate</span> DVM leaders</h2>
-      <div class="section-subhead">
-        Veterinarians, welfare advocates, and mental health first aiders.
-      </div>
-      <div class="team-grid">
-        <div class="team-card">
-          <div class="team-avatar"><i class="fas fa-user-md"></i></div>
-          <h4>Dr. Ghulam Hussain&nbsp;</h4>
-          <div class="dvm-title">DVM</div>
-          <p class="team-bio">15+ year's experience.&nbsp;</p><p class="team-bio">Leads our Telemedicine</p><p class="team-bio">&nbsp;outreach in 5 cities.</p>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar"><i class="fas fa-user-md"></i></div>
-          <h4>Dr. Marcus Rivera</h4>
-          <div class="dvm-title">DVM, CVA</div>
-          <p class="team-bio">Veterinary acupuncturist. Directs DVM wellness &amp; compassion fatigue retreats.</p>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar"><i class="fas fa-user-md"></i></div>
-          <h4>Dr. Aisha Khan</h4>
-          <div class="dvm-title">DVM, MS</div>
-          <p class="team-bio">Emergency critical care. founded Vet-to-Vet peer support hotline.</p>
-        </div>
-        <div class="team-card">
-          <div class="team-avatar"><i class="fas fa-user-md"></i></div>
-          <h4>Dr. James Okafor</h4>
-          <div class="dvm-title">DVM, PhD</div>
-          <p class="team-bio">Epidemiology. Wildlife rescue &amp; one-health zoonosis programs.</p>
+    <!-- MAIN FEED -->
+    <main class="main-feed">
+      <div class="card" style="padding: 1rem;">
+        <div class="stories">
+          <div class="story"><div class="story-ring"><img class="story-img" src="https://randomuser.me/api/portraits/women/68.jpg" alt="story"></div><span>lisa.k</span></div>
+          <div class="story"><div class="story-ring"><img class="story-img" src="https://randomuser.me/api/portraits/men/45.jpg" alt="story"></div><span>marcus</span></div>
+          <div class="story"><div class="story-ring"><img class="story-img" src="https://randomuser.me/api/portraits/women/33.jpg" alt="story"></div><span>sarah_art</span></div>
+          <div class="story"><div class="story-ring"><img class="story-img" src="https://randomuser.me/api/portraits/men/22.jpg" alt="story"></div><span>james.dev</span></div>
+          <div class="story"><div class="story-ring"><img class="story-img" src="https://randomuser.me/api/portraits/women/90.jpg" alt="story"></div><span>emma.w</span></div>
         </div>
       </div>
-    </section>
 
-    <!-- TESTIMONIALS – impact stories -->
-    <section class="section container">
-      <h2 class="section-title"><span>Voices</span> from the community</h2>
-      <div class="section-subhead">
-        Real stories from DVM colleagues and pet owners.
-      </div>
-      <div class="testimonial-grid">
-        <div class="testimonial">
-          <i class="fas fa-quote-left"></i>
-          <p>"The DWM welfare grant helped me recover from severe burnout. Now I'm back to practice with balance."</p>
-          <div class="testimonial-author">
-            <i class="fas fa-circle-user"></i>
-            <div class="author-info">
-              <strong>Dr. Priya M.</strong><br>DVM, Georgia
-            </div>
-          </div>
+      <div class="card create-post">
+        <div class="post-input-area">
+          <img id="createPostAvatar" src="" alt="your avatar">
+          <textarea id="postContent" rows="2" placeholder="What's on your mind?"></textarea>
         </div>
-        <div class="testimonial">
-          <i class="fas fa-quote-left"></i>
-          <p>"They provided free spay clinic for 70 stray cats in our neighborhood. Professional and so kind."</p>
-          <div class="testimonial-author">
-            <i class="fas fa-circle-user"></i>
-            <div class="author-info">
-              <strong>Northside Shelter</strong><br>Chicago
-            </div>
-          </div>
-        </div>
-        <div class="testimonial">
-          <i class="fas fa-quote-left"></i>
-          <p>"As a final-year vet student, their mentorship program gave me confidence in shelter medicine."</p>
-          <div class="testimonial-author">
-            <i class="fas fa-circle-user"></i>
-            <div class="author-info">
-              <strong>Elena R.</strong><br>DVM candidate
-            </div>
-          </div>
+        <div class="post-actions">
+          <input type="text" id="postImageUrl" class="image-url-input" placeholder="Image URL (optional)">
+          <button id="publishPostBtn" class="post-btn"><i class="fas fa-paper-plane"></i> Post</button>
         </div>
       </div>
-    </section>
 
-    <!-- CONTACT / FOOTER (wrapped as advanced footer grid) -->
-    <footer id="contact" class="footer">
-      <div class="footer-grid">
-        <div class="footer-about">
-          <div class="footer-logo">
-            <i class="fas fa-paw"></i> DVM WELFARE
-          </div>
-          <p>
-            Global collective of DVM professionals.<br> 
-            Charity #86‑1332491. 100% of donations<br>
-            fund veterinary welfare &amp; animal aid.
-          </p>
-          <div class="social-links">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-x-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><br></a>
-          </div>
-        </div>
-        <div class="footer-col">
-          <h5>Our work</h5>
-          <ul>
-            <li><a href="#">Animal clinics</a></li>
-            <li><a href="#">DVM wellness</a></li>
-            <li><a href="#">Disaster relief</a></li>
-            <li><a href="#">Research</a></li>
-            <li><a href="#">Advocacy</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>Get involved</h5>
-          <ul>
-            <li><a href="#">Volunteer DVM</a></li>
-            <li><a href="#">Foster network</a></li>
-            <li><a href="#">Student chapters</a></li>
-            <li><a href="#">Corporate partners</a></li>
-            <li><a href="#">Planned giving</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h5>Newsletter</h5>
-          <p style="color:#bdd3cf; margin-bottom:1.2rem;">Vet welfare updates, monthly.</p>
-          <div class="newsletter-form">
-            <input type="email" placeholder="your@email.com" aria-label="email">
-            <button aria-label="subscribe"><i class="fas fa-arrow-right"></i></button>
-          </div>
-          <p style="font-size:0.8rem; margin-top:1.2rem; opacity:0.7;">No spam, only DVM resources.</p><p style="font-size:0.8rem; margin-top:1.2rem; opacity:0.7;">email: dr.vet.ghulamhussain@gmail.com</p>
-        </div>
+      <div id="postsFeed" class="feed-container"></div>
+    </main>
+
+    <!-- RIGHT SIDEBAR -->
+    <aside class="sidebar-right">
+      <div class="card">
+        <h4 style="margin-bottom: 1rem;"><i class="fas fa-fire"></i> Trending now</h4>
+        <div class="trending-item"><i class="fas fa-hashtag"></i><div><strong>#UIinspiration</strong><small>2.4k posts</small></div></div>
+        <div class="trending-item"><i class="fas fa-hashtag"></i><div><strong>#frontendmagic</strong><small>1.1k posts</small></div></div>
+        <div class="trending-item"><i class="fas fa-music"></i><div><strong>New vibes 2025</strong><small>trending</small></div></div>
       </div>
-      <div class="footer-bottom">
-        <i class="fas fa-stethoscope"></i> © 2025 DVM Welfare Initiative – healing with science &amp; empathy. 
-        <span style="display:inline-block; margin-left: 0.5rem;">🩺🐾</span>
+      <div class="card" style="margin-top: 1rem;">
+        <h4 style="margin-bottom: 1rem;"><i class="fas fa-user-plus"></i> Suggested</h4>
+        <div class="suggest-item"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""><div class="suggest-info"><p>Priya Sharma</p><small>@priya.creates</small></div><span class="follow-btn">Follow</span></div>
+        <div class="suggest-item"><img src="https://randomuser.me/api/portraits/men/91.jpg" alt=""><div class="suggest-info"><p>Marcus Chen</p><small>@marc_codes</small></div><span class="follow-btn">Follow</span></div>
       </div>
-    </footer>
-  </main>
-
-  <!-- tiny advanced scroll effect: navbar shadow enhancement -->
-  <script>
-    (function() {
-      window.addEventListener('scroll', function() {
-        var navbar = document.querySelector('.navbar');
-        if (window.scrollY > 30) {
-          navbar.classList.add('navbar-scrolled');
-        } else {
-          navbar.classList.remove('navbar-scrolled');
-        }
-      });
-    })();
-  </script>
-
-  <!-- smooth internal anchor (no jump glitch) -->
-  <style>
-    /* in case any anchor overrides */
-    .navbar-scrolled {
-      box-shadow: 0 10px 35px rgba(15\,111,94,0.12) !important;
-    }
-  </style>
-
-</body></html>
+    </aside>
+  </div>
+  <div class="mobile-bottom-nav">
+    <i class="fas fa-home"></i>
+    <i class="fas fa-search"></i>
+    <i class="fas fa-plus-circle"></i>
+    <i class="fas fa-heart"></i>
+    <i class="fas fa-user"></i>
+  </div>
+</div>
 
 <script>
-    document.querySelectorAll('.btn-donate').forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('JazzCash Account Number:\n\n03016025335\n\nMezan bank account: 12800110564655\n\nThank you for your donation!');
-        });
+  // ---------- USER & AUTH STORAGE ----------
+  let CURRENT_USER = null;
+  let posts = [];     // will be loaded from localStorage or default seed
+
+  // Default seed posts (shared across all users)
+  const DEFAULT_POSTS = [
+    {
+      id: "p1",
+      author: { name: "Sophia Martinez", username: "@sophia.m", avatar: "https://randomuser.me/api/portraits/women/68.jpg" },
+      content: "Just finished this beautiful UI concept! ✨ What do you think?",
+      imageUrl: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=600&auto=format",
+      likes: 42,
+      likedBy: [],  // store user IDs that liked
+      comments: [
+        { user: "Liam K.", text: "Stunning! Love the gradients." },
+        { user: "Emma W.", text: "so clean 🔥" }
+      ],
+      timestamp: Date.now() - 1000 * 60 * 35
+    },
+    {
+      id: "p2",
+      author: { name: "Marcus Chen", username: "@marc_codes", avatar: "https://randomuser.me/api/portraits/men/45.jpg" },
+      content: "CSS Grid is pure magic. Built this responsive layout in minutes! 🚀",
+      imageUrl: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&auto=format",
+      likes: 128,
+      likedBy: [],
+      comments: [
+        { user: "Alex Johnson", text: "Amazing! Grid is a lifesaver." },
+        { user: "Priya S.", text: "Totally agree!" }
+      ],
+      timestamp: Date.now() - 1000 * 60 * 120
+    },
+    {
+      id: "p3",
+      author: { name: "Zara Khan", username: "@zara.vision", avatar: "https://randomuser.me/api/portraits/women/33.jpg" },
+      content: "Golden hour vibes at the studio 🌞✨",
+      imageUrl: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=600&auto=format",
+      likes: 87,
+      likedBy: [],
+      comments: [
+        { user: "Sophia M.", text: "So aesthetic!" }
+      ],
+      timestamp: Date.now() - 1000 * 60 * 60 * 5
+    }
+  ];
+
+  // Load users from localStorage
+  function loadUsers() {
+    let users = localStorage.getItem("connecthub_users");
+    if (!users) {
+      // create a default demo user (optional) so login has at least one account
+      const defaultUser = {
+        id: "user_demo",
+        name: "Demo Explorer",
+        username: "demo",
+        email: "demo@connecthub.com",
+        password: "demo123",
+        avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+        postsCount: 0
+      };
+      users = [defaultUser];
+      localStorage.setItem("connecthub_users", JSON.stringify(users));
+    }
+    return JSON.parse(users);
+  }
+
+  function saveUsers(users) {
+    localStorage.setItem("connecthub_users", JSON.stringify(users));
+  }
+
+  // Load posts (global)
+  function loadPosts() {
+    const storedPosts = localStorage.getItem("connecthub_posts");
+    if (storedPosts) {
+      posts = JSON.parse(storedPosts);
+    } else {
+      posts = JSON.parse(JSON.stringify(DEFAULT_POSTS)); // deep copy
+      savePosts();
+    }
+    // ensure each post has likedBy array (migration)
+    posts.forEach(p => { if (!p.likedBy) p.likedBy = []; });
+    savePosts();
+  }
+
+  function savePosts() {
+    localStorage.setItem("connecthub_posts", JSON.stringify(posts));
+  }
+
+  // Helper: get relative time
+  function getRelativeTime(timestamp) {
+    const seconds = Math.floor((Date.now() - timestamp) / 1000);
+    if (seconds < 60) return "Just now";
+    const minutes = Math.floor(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.floor(hours / 24);
+    if (days < 7) return `${days}d ago`;
+    return new Date(timestamp).toLocaleDateString();
+  }
+
+  function escapeHtml(str) {
+    if (!str) return "";
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
     });
+  }
+
+  // Render feed (global posts)
+  function renderFeed() {
+    const feedContainer = document.getElementById("postsFeed");
+    if (!feedContainer) return;
+    if (posts.length === 0) {
+      feedContainer.innerHTML = `<div class="card empty-feed">✨ No posts yet. Be the first to share!</div>`;
+      return;
+    }
+    let html = "";
+    // sort newest first
+    [...posts].sort((a,b) => b.timestamp - a.timestamp).forEach(post => {
+      const timeAgo = getRelativeTime(post.timestamp);
+      const isLiked = CURRENT_USER && post.likedBy.includes(CURRENT_USER.id);
+      const likeBtnClass = isLiked ? "like-btn liked" : "like-btn";
+      const likeIcon = isLiked ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+      
+      let commentsHtml = `<div class="comments-section" id="comments-${post.id}" style="display:none;">`;
+      commentsHtml += `<div class="comment-list">`;
+      if (post.comments.length === 0) {
+        commentsHtml += `<div style="font-size:0.75rem; color:#94a3b8;">No comments yet. Be first!</div>`;
+      } else {
+        post.comments.forEach(comment => {
+          commentsHtml += `<div class="single-comment"><strong>${escapeHtml(comment.user)}</strong> ${escapeHtml(comment.text)}</div>`;
+        });
+      }
+      commentsHtml += `</div>`;
+      commentsHtml += `<form class="comment-form" data-post-id="${post.id}">
+                        <input type="text" placeholder="Write a comment..." class="comment-input" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                       </form>
+                      </div>`;
+      
+      html += `
+        <div class="post-card" data-post-id="${post.id}">
+          <div class="post-header">
+            <img src="${post.author.avatar}" alt="avatar">
+            <div class="post-user">
+              <h4>${escapeHtml(post.author.name)} <span>${escapeHtml(post.author.username)}</span></h4>
+              <span>${timeAgo}</span>
+            </div>
+          </div>
+          <div class="post-content">${escapeHtml(post.content)}</div>
+          ${post.imageUrl ? `<div class="post-media"><img src="${post.imageUrl}" alt="post image" loading="lazy" onerror="this.style.display='none'"></div>` : ''}
+          <div class="post-stats">
+            <span><i class="far fa-heart"></i> ${post.likes} likes</span>
+            <span><i class="far fa-comment"></i> ${post.comments.length} comments</span>
+          </div>
+          <div class="post-buttons">
+            <button class="${likeBtnClass}" data-id="${post.id}">${likeIcon} Like</button>
+            <button class="comment-toggle" data-comment-id="${post.id}"><i class="far fa-comment-dots"></i> Comment</button>
+          </div>
+          ${commentsHtml}
+        </div>
+      `;
+    });
+    feedContainer.innerHTML = html;
+    
+    // attach comment toggle events
+    document.querySelectorAll('.comment-toggle').forEach(btn => {
+      const postId = btn.getAttribute('data-comment-id');
+      const commentDiv = document.getElementById(`comments-${postId}`);
+      if (commentDiv) {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          commentDiv.style.display = commentDiv.style.display === 'none' ? 'block' : 'none';
+        });
+      }
+    });
+  }
+
+  function addNewPost(content, imageUrl) {
+    if (!content.trim()) {
+      alert("Please write something before posting!");
+      return false;
+    }
+    const newPost = {
+      id: Date.now().toString(),
+      author: {
+        name: CURRENT_USER.name,
+        username: CURRENT_USER.username,
+        avatar: CURRENT_USER.avatar
+      },
+      content: content.trim(),
+      imageUrl: imageUrl && imageUrl.trim() !== "" ? imageUrl.trim() : null,
+      likes: 0,
+      likedBy: [],
+      comments: [],
+      timestamp: Date.now()
+    };
+    posts.unshift(newPost);
+    savePosts();
+    renderFeed();
+    updateUserPostCount();
+    return true;
+  }
+
+  function toggleLike(postId) {
+    const post = posts.find(p => p.id === postId);
+    if (post) {
+      const idx = post.likedBy.indexOf(CURRENT_USER.id);
+      if (idx === -1) {
+        post.likedBy.push(CURRENT_USER.id);
+        post.likes += 1;
+      } else {
+        post.likedBy.splice(idx, 1);
+        post.likes -= 1;
+      }
+      savePosts();
+      renderFeed();
+    }
+  }
+
+  function addCommentToPost(postId, commentText) {
+    if (!commentText.trim()) return false;
+    const post = posts.find(p => p.id === postId);
+    if (post) {
+      post.comments.push({
+        user: CURRENT_USER.name,
+        text: commentText.trim()
+      });
+      savePosts();
+      renderFeed();
+      return true;
+    }
+    return false;
+  }
+
+  function setupFeedDelegation() {
+    const feedContainer = document.getElementById("postsFeed");
+    if (!feedContainer) return;
+    feedContainer.addEventListener("click", (e) => {
+      const likeButton = e.target.closest(".like-btn");
+      if (likeButton && likeButton.getAttribute("data-id")) {
+        e.preventDefault();
+        const postId = likeButton.getAttribute("data-id");
+        toggleLike(postId);
+      }
+    });
+    feedContainer.addEventListener("submit", (e) => {
+      const form = e.target.closest(".comment-form");
+      if (form && form.classList.contains("comment-form")) {
+        e.preventDefault();
+        const postId = form.getAttribute("data-post-id");
+        const inputField = form.querySelector(".comment-input");
+        if (inputField && postId) {
+          const commentText = inputField.value;
+          if (commentText.trim() !== "") {
+            addCommentToPost(postId, commentText);
+            inputField.value = "";
+          } else {
+            alert("Write a comment first!");
+          }
+        }
+      }
+    });
+  }
+
+  function initCreatePost() {
+    const publishBtn = document.getElementById("publishPostBtn");
+    const contentArea = document.getElementById("postContent");
+    const imageUrlInput = document.getElementById("postImageUrl");
+    if (publishBtn) {
+      publishBtn.addEventListener("click", () => {
+        const content = contentArea.value;
+        const imgUrl = imageUrlInput.value;
+        if (addNewPost(content, imgUrl)) {
+          contentArea.value = "";
+          imageUrlInput.value = "";
+        }
+      });
+    }
+  }
+
+  function updateUIUserInfo() {
+    const avatarImgs = document.querySelectorAll("#currentUserAvatar, #createPostAvatar");
+    avatarImgs.forEach(img => { if(img) img.src = CURRENT_USER.avatar; });
+    const nameSpan = document.getElementById("currentUserName");
+    if (nameSpan) nameSpan.innerText = CURRENT_USER.name;
+    const handleSpan = document.getElementById("currentUserHandle");
+    if (handleSpan) handleSpan.innerText = CURRENT_USER.username;
+    // update post count in stats (count posts by current user)
+    const userPostsCount = posts.filter(p => p.author.username === CURRENT_USER.username).length;
+    const statPostSpan = document.querySelector(".stats .stat:first-child span:first-child");
+    if (statPostSpan) statPostSpan.innerText = userPostsCount;
+  }
+
+  function updateUserPostCount() {
+    const userPostsCount = posts.filter(p => p.author.username === CURRENT_USER.username).length;
+    const statPostSpan = document.querySelector(".stats .stat:first-child span:first-child");
+    if (statPostSpan) statPostSpan.innerText = userPostsCount;
+  }
+
+  // ---------- AUTH ACTIONS ----------
+  function showApp() {
+    document.getElementById("authContainer").style.display = "none";
+    document.getElementById("mainApp").style.display = "block";
+    updateUIUserInfo();
+    renderFeed();
+    setupFeedDelegation();
+    initCreatePost();
+  }
+
+  function logout() {
+    CURRENT_USER = null;
+    localStorage.removeItem("connecthub_current_user");
+    document.getElementById("authContainer").style.display = "flex";
+    document.getElementById("mainApp").style.display = "none";
+    // reset forms
+    document.getElementById("loginForm").classList.remove("hidden-form");
+    document.getElementById("signupForm").classList.add("hidden-form");
+    document.getElementById("loginError").innerText = "";
+    document.getElementById("signupError").innerText = "";
+  }
+
+  function login(identifier, password) {
+    const users = loadUsers();
+    const user = users.find(u => (u.email === identifier || u.username === identifier) && u.password === password);
+    if (user) {
+      CURRENT_USER = { ...user }; // copy
+      localStorage.setItem("connecthub_current_user", JSON.stringify(CURRENT_USER));
+      showApp();
+      return true;
+    }
+    return false;
+  }
+
+  function signup(name, username, email, password, confirm) {
+    if (password !== confirm) {
+      document.getElementById("signupError").innerText = "Passwords do not match.";
+      return false;
+    }
+    if (!name || !username || !email || !password) {
+      document.getElementById("signupError").innerText = "All fields are required.";
+      return false;
+    }
+    const users = loadUsers();
+    if (users.find(u => u.username === username)) {
+      document.getElementById("signupError").innerText = "Username already taken.";
+      return false;
+    }
+    if (users.find(u => u.email === email)) {
+      document.getElementById("signupError").innerText = "Email already registered.";
+      return false;
+    }
+    const newUser = {
+      id: "user_" + Date.now(),
+      name: name.trim(),
+      username: username.trim().toLowerCase(),
+      email: email.trim(),
+      password: password,
+      avatar: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random()*70)}.jpg`,
+      postsCount: 0
+    };
+    users.push(newUser);
+    saveUsers(users);
+    CURRENT_USER = { ...newUser };
+    localStorage.setItem("connecthub_current_user", JSON.stringify(CURRENT_USER));
+    showApp();
+    return true;
+  }
+
+  // UI toggle between login and signup
+  function showLoginForm() {
+    document.getElementById("loginForm").classList.remove("hidden-form");
+    document.getElementById("signupForm").classList.add("hidden-form");
+    document.getElementById("loginError").innerText = "";
+    document.getElementById("signupError").innerText = "";
+  }
+  function showSignupForm() {
+    document.getElementById("loginForm").classList.add("hidden-form");
+    document.getElementById("signupForm").classList.remove("hidden-form");
+    document.getElementById("loginError").innerText = "";
+    document.getElementById("signupError").innerText = "";
+  }
+
+  // Event listeners
+  document.getElementById("doLoginBtn").addEventListener("click", () => {
+    const identifier = document.getElementById("loginIdentifier").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
+    if (!identifier || !password) {
+      document.getElementById("loginError").innerText = "Please enter email/username and password.";
+      return;
+    }
+    const success = login(identifier, password);
+    if (!success) document.getElementById("loginError").innerText = "Invalid credentials. Try again or sign up.";
+  });
+  document.getElementById("doSignupBtn").addEventListener("click", () => {
+    const name = document.getElementById("signupName").value.trim();
+    const username = document.getElementById("signupUsername").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value;
+    const confirm = document.getElementById("signupConfirm").value;
+    signup(name, username, email, password, confirm);
+  });
+  document.getElementById("showSignupLink").addEventListener("click", showSignupForm);
+  document.getElementById("showLoginLink").addEventListener("click", showLoginForm);
+  document.getElementById("logoutBtn")?.addEventListener("click", logout);
+
+  // Check existing session
+  function checkSession() {
+    const savedUser = localStorage.getItem("connecthub_current_user");
+    if (savedUser) {
+      CURRENT_USER = JSON.parse(savedUser);
+      // verify user still exists in users list
+      const users = loadUsers();
+      const exists = users.find(u => u.id === CURRENT_USER.id);
+      if (exists) {
+        showApp();
+        return;
+      } else {
+        localStorage.removeItem("connecthub_current_user");
+      }
+    }
+    // else show auth
+    document.getElementById("authContainer").style.display = "flex";
+    document.getElementById("mainApp").style.display = "none";
+    showLoginForm();
+  }
+
+  // Init data and session
+  loadPosts();
+  checkSession();
 </script>
+</body>
+</html>
